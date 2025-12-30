@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Security Module
+OmniCRM Ultimate Enterprise - Security Module
 Version: 7.0.0
 Advanced security features including encryption, hashing, JWT, 2FA
 """

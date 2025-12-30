@@ -296,7 +296,7 @@ class ReportService:
         
         metadata = {
             "period": period,
-            "generated_by": "Hunter Pro CRM"
+            "generated_by": "OmniCRM Ultimate"
         }
         
         return await self.generate_pdf_report(

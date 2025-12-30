@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - User Model
+OmniCRM Ultimate Enterprise - User Model
 Version: 7.0.0
 """
 

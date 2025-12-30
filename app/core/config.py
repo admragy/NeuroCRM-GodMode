@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Configuration Management
+OmniCRM Ultimate Enterprise - Configuration Management
 Version: 7.0.0
 """
 
@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     """Application Settings with validation and type hints"""
     
     # ========== Application ==========
-    APP_NAME: str = "Hunter Pro CRM Ultimate Enterprise"
+    APP_NAME: str = "OmniCRM Ultimate Enterprise"
     APP_VERSION: str = "7.0.0"
     APP_DESCRIPTION: str = "AI-Powered CRM with Multi-Channel Integration"
     ENVIRONMENT: str = Field(default="development", pattern="^(development|staging|production)$")
@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     RATE_LIMIT_PERIOD: int = 60
     
     # ========== Database ==========
-    DATABASE_URL: str = "sqlite+aiosqlite:///./hunter_pro.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./omnicrm.db"
     DB_POOL_SIZE: int = 20
     DB_MAX_OVERFLOW: int = 10
     DB_POOL_TIMEOUT: int = 30
@@ -97,11 +97,11 @@ class Settings(BaseSettings):
     VECTOR_DB_TYPE: str = "qdrant"
     PINECONE_API_KEY: Optional[str] = None
     PINECONE_ENVIRONMENT: Optional[str] = None
-    PINECONE_INDEX_NAME: str = "hunter-pro-vectors"
+    PINECONE_INDEX_NAME: str = "omnicrm-vectors"
     
     QDRANT_URL: str = "http://localhost:6333"
     QDRANT_API_KEY: Optional[str] = None
-    QDRANT_COLLECTION_NAME: str = "hunter_pro_embeddings"
+    QDRANT_COLLECTION_NAME: str = "omnicrm_embeddings"
     
     EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
     EMBEDDING_DIMENSION: int = 384
@@ -171,7 +171,7 @@ class Settings(BaseSettings):
     SMTP_USERNAME: Optional[str] = None
     SMTP_PASSWORD: Optional[str] = None
     SMTP_FROM_EMAIL: Optional[str] = None
-    SMTP_FROM_NAME: str = "Hunter Pro CRM"
+    SMTP_FROM_NAME: str = "OmniCRM Ultimate"
     
     SENDGRID_API_KEY: Optional[str] = None
     MAILGUN_API_KEY: Optional[str] = None
@@ -254,7 +254,7 @@ class Settings(BaseSettings):
     
     # ========== PWA ==========
     PWA_ENABLED: bool = True
-    PWA_NAME: str = "Hunter Pro CRM"
+    PWA_NAME: str = "OmniCRM Ultimate"
     PWA_SHORT_NAME: str = "HunterPro"
     PWA_THEME_COLOR: str = "#4F46E5"
     PWA_BACKGROUND_COLOR: str = "#ffffff"

@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise Edition v7.0.0
+OmniCRM Ultimate Enterprise Edition v7.0.0
 Main Application Entry Point
 
 Advanced CRM System with:
@@ -51,7 +51,7 @@ Path("logs").mkdir(exist_ok=True)
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
     # Startup
-    logger.info("🚀 Starting Hunter Pro CRM Ultimate Enterprise...")
+    logger.info("🚀 Starting OmniCRM Ultimate Enterprise...")
     logger.info(f"📍 Environment: {settings.ENVIRONMENT}")
     logger.info(f"🔧 Debug Mode: {settings.DEBUG}")
     
@@ -71,7 +71,7 @@ async def lifespan(app: FastAPI):
         logger.warning(f"⚠️ AI Service initialization warning: {str(e)}")
     
     logger.info("=" * 80)
-    logger.info("🎉 Hunter Pro CRM is ready!")
+    logger.info("🎉 OmniCRM Ultimate is ready!")
     logger.info(f"📖 API Docs: http://{settings.HOST}:{settings.PORT}/docs")
     logger.info(f"🌐 Dashboard: http://{settings.HOST}:{settings.PORT}/")
     logger.info("=" * 80)
@@ -79,14 +79,14 @@ async def lifespan(app: FastAPI):
     yield
     
     # Shutdown
-    logger.info("👋 Shutting down Hunter Pro CRM...")
+    logger.info("👋 Shutting down OmniCRM Ultimate...")
     await engine.dispose()
     logger.info("✅ Shutdown complete")
 
 
 # Create FastAPI application
 app = FastAPI(
-    title="Hunter Pro CRM Ultimate Enterprise Edition",
+    title="OmniCRM Ultimate Enterprise Edition",
     description="""
     🚀 **Advanced CRM System with AI Integration**
     

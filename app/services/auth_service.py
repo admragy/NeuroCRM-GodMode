@@ -128,7 +128,7 @@ class AuthService:
         totp = pyotp.TOTP(secret)
         provisioning_uri = totp.provisioning_uri(
             name=user_email,
-            issuer_name="Hunter Pro CRM"
+            issuer_name="OmniCRM Ultimate"
         )
         
         # Generate QR code

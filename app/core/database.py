@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Database Management
+OmniCRM Ultimate Enterprise - Database Management
 Version: 7.0.0
 Advanced database setup with async support and connection pooling
 """

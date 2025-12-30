@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Internationalization (i18n)
+OmniCRM Ultimate Enterprise - Internationalization (i18n)
 Version: 7.0.0
 Multi-language support system
 """

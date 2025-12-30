@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Deal Model
+OmniCRM Ultimate Enterprise - Deal Model
 Version: 7.0.0
 """
 

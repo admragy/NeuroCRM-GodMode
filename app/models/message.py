@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Message Model
+OmniCRM Ultimate Enterprise - Message Model
 Version: 7.0.0
 """
 

@@ -24,7 +24,7 @@ class EmailService:
         self.smtp_user = os.getenv("SMTP_USER")
         self.smtp_password = os.getenv("SMTP_PASSWORD")
         self.from_email = os.getenv("FROM_EMAIL", self.smtp_user)
-        self.from_name = os.getenv("FROM_NAME", "Hunter Pro CRM")
+        self.from_name = os.getenv("FROM_NAME", "OmniCRM Ultimate")
         
         logger.info("✅ Email Service initialized")
     
@@ -94,13 +94,13 @@ class EmailService:
     
     async def send_welcome_email(self, to_email: str, name: str) -> Dict[str, Any]:
         """Send welcome email"""
-        subject = f"Welcome to Hunter Pro CRM, {name}!"
+        subject = f"Welcome to OmniCRM Ultimate, {name}!"
         
         html_body = f"""
         <html>
         <body style="font-family: Arial, sans-serif;">
             <h1 style="color: #6366f1;">Welcome {name}!</h1>
-            <p>Thank you for joining Hunter Pro CRM.</p>
+            <p>Thank you for joining OmniCRM Ultimate.</p>
             <p>Get started with our powerful features:</p>
             <ul>
                 <li>AI-powered customer insights</li>

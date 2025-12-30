@@ -21,7 +21,7 @@ class GitHubManager:
     def __init__(self):
         self.token = os.getenv('GITHUB_TOKEN')
         self.username = os.getenv('GITHUB_USERNAME', 'admragy')
-        self.repo_name = os.getenv('GITHUB_REPO', 'hunter-pro-crm')
+        self.repo_name = os.getenv('GITHUB_REPO', 'OmniCRM-Ultimate')
 
         if not self.token:
             logger.warning("GITHUB_TOKEN not found in environment variables")

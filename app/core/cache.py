@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Cache Module
+OmniCRM Ultimate Enterprise - Cache Module
 Version: 7.0.0
 Redis caching system with async support
 """

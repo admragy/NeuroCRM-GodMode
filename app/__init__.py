@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise v7.0.0
+OmniCRM Ultimate Enterprise v7.0.0
 Main Application Package
 """
 

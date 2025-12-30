@@ -1,5 +1,5 @@
 """
-Hunter Pro CRM Ultimate Enterprise - Campaign Model
+OmniCRM Ultimate Enterprise - Campaign Model
 Version: 7.0.0
 """
 
