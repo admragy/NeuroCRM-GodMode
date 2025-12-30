@@ -1,69 +1,34 @@
-# Hunter Pro CRM Ultimate Enterprise - Dockerfile
-# Version: 7.0.0
-# Multi-stage build for optimized image size
-
-# ========== Stage 1: Builder ==========
-FROM python:3.11-slim as builder
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    g++ \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create virtual environment
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Copy requirements and install Python dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install -r requirements.txt
-
-# ========== Stage 2: Runtime ==========
+# OmniCRM Ultimate - Dockerfile for Production
 FROM python:3.11-slim
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PATH="/opt/venv/bin:$PATH"
-
-# Install runtime dependencies only
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq5 \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create app user for security
-RUN useradd -m -u 1000 appuser && \
-    mkdir -p /app /app/uploads /app/logs && \
-    chown -R appuser:appuser /app
-
-# Copy virtual environment from builder
-COPY --from=builder /opt/venv /opt/venv
 
 # Set working directory
 WORKDIR /app
 
-# Copy application code
-COPY --chown=appuser:appuser . .
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-# Switch to non-root user
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create non-root user
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Expose port
-EXPOSE 5000
+EXPOSE 8080
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:5000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+    CMD python -c "import requests; requests.get('http://localhost:8080/health')"
 
 # Run application
-CMD ["python", "main.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "4"]
