@@ -287,8 +287,9 @@ class Settings(BaseSettings):
     DEBUG_TOOLBAR: bool = True
     
     # ========== Admin ==========
-    ADMIN_EMAIL: str = "admin@hunterpro.com"
-    ADMIN_PASSWORD: str = "ChangeThisPassword123!"
+    # ⚠️ SECURITY: Admin credentials removed from config
+    # Create admin user via CLI: python scripts/create_admin.py
+    ADMIN_EMAIL: Optional[str] = None  # Set via environment variable only
     ADMIN_FIRST_NAME: str = "Admin"
     ADMIN_LAST_NAME: str = "User"
     

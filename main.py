@@ -26,7 +26,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 
 from app.core.config import settings
 from app.core.database import engine, create_tables
-from app.core.security import get_current_user
+from app.api.dependencies import get_ws_current_user
 from app.api.routes import api_router
 from app.services.websocket_service import manager, handle_chat_message, handle_typing_indicator
 from fastapi import WebSocket, WebSocketDisconnect
@@ -122,13 +122,28 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
-# CORS Middleware
+# CORS Middleware - Strict configuration for production
+if settings.ENVIRONMENT == "production":
+    # Production: strict CORS
+    allowed_origins = [
+        origin for origin in settings.CORS_ORIGINS 
+        if origin.startswith("https://")
+    ]
+    allowed_methods = ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    allowed_headers = ["Content-Type", "Authorization", "X-CSRF-Token"]
+else:
+    # Development: permissive CORS
+    allowed_origins = settings.CORS_ORIGINS
+    allowed_methods = ["*"]
+    allowed_headers = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=allowed_methods,
+    allow_headers=allowed_headers,
+    expose_headers=["X-Total-Count", "X-Page-Count"]
 )
 
 # GZip Compression
@@ -144,10 +159,19 @@ app.include_router(api_router)
 
 # ==================== WEBSOCKET ENDPOINTS ====================
 
-@app.websocket("/ws/{user_id}")
-async def websocket_endpoint(websocket: WebSocket, user_id: int):
+@app.websocket("/ws")
+async def websocket_endpoint(
+    websocket: WebSocket,
+    user_id: int = Depends(get_ws_current_user)
+):
     """
-    WebSocket endpoint for real-time chat and notifications
+    🔒 SECURE WebSocket endpoint for real-time chat and notifications
+    Requires JWT authentication via query parameter: /ws?token=YOUR_JWT_TOKEN
+    
+    Security improvements:
+    - JWT token validation before connection
+    - User ID extracted from verified token (not from URL)
+    - Prevents unauthorized access to other users' messages
     """
     await manager.connect(websocket, user_id)
     
