@@ -298,6 +298,48 @@ class Settings(BaseSettings):
     SUPPORT_EMAIL: str = "support@hunterpro.com"
     SUPPORT_PHONE: str = "+1-234-567-8900"
     
+    # ========== Supabase Cloud Persistence ==========
+    SUPABASE_URL: Optional[str] = None
+    SUPABASE_KEY: Optional[str] = None
+    SUPABASE_JWT_SECRET: Optional[str] = None
+    SUPABASE_SYNC_ENABLED: bool = False
+    SUPABASE_SYNC_INTERVAL: int = 30  # seconds
+    SUPABASE_AUTO_BACKUP: bool = True
+    SUPABASE_REALTIME_ENABLED: bool = True
+    
+    # ========== Advanced AI Features ==========
+    # Strategic Audit
+    STRATEGIC_AUDIT_ENABLED: bool = True
+    STRATEGIC_AUDIT_INTERVAL: int = 86400  # 24 hours
+    STRATEGIC_AUDIT_AUTO_RUN: bool = False
+    
+    # Neural Empathy Sync
+    NEURAL_EMPATHY_ENABLED: bool = True
+    NEURAL_EMPATHY_MODEL: str = "gemini-1.5-pro"  # For sentiment analysis
+    NEURAL_EMPATHY_THRESHOLD: float = 0.7  # Stress detection threshold
+    NEURAL_EMPATHY_LANGUAGES: List[str] = ["ar", "en"]
+    
+    # Strategic Compass
+    STRATEGIC_COMPASS_ENABLED: bool = True
+    STRATEGIC_COMPASS_RECALC_INTERVAL: int = 3600  # 1 hour
+    STRATEGIC_COMPASS_TOP_PRIORITY_COUNT: int = 10
+    
+    # Gemini Live API (Voice AI)
+    GEMINI_LIVE_ENABLED: bool = False
+    GEMINI_LIVE_MODEL: str = "gemini-2.0-flash-exp"  # Latest Gemini Live model
+    GEMINI_LIVE_VOICE: str = "Aoede"  # Voice option
+    GEMINI_LIVE_WEBSOCKET_URL: str = "wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent"
+    
+    # Marketing & Growth Hub
+    MARKETING_HUB_ENABLED: bool = True
+    AB_TESTING_ENABLED: bool = True
+    AB_TESTING_MIN_SAMPLE_SIZE: int = 100
+    IMAGEN_ENABLED: bool = False  # Google Imagen for visual generation
+    IMAGEN_MODEL: str = "imagen-3.0-generate-001"
+    MARKET_INTELLIGENCE_ENABLED: bool = True
+    GOOGLE_SEARCH_API_KEY: Optional[str] = None
+    GOOGLE_SEARCH_ENGINE_ID: Optional[str] = None
+    
     @validator("CORS_ORIGINS", pre=True)
     def parse_cors_origins(cls, v):
         if isinstance(v, str):
