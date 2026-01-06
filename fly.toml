@@ -1,41 +1,17 @@
-# fly.toml app configuration file
-# Documentation: https://fly.io/docs/reference/configuration/
-
-app = "omnicrm-ultimate"
-primary_region = "fra"
-kill_signal = "SIGINT"
-kill_timeout = "5s"
-
-[experimental]
-  auto_rollback = true
+# fly.toml configuration for NeuroCRM-GodMode
+app = "neurocrm-godmode-v1" # ⚠️ Change this to a unique name if needed
+primary_region = "ams"
 
 [build]
   dockerfile = "Dockerfile"
 
 [env]
-  ENVIRONMENT = "production"
-  DEBUG = "False"
-  APP_NAME = "OmniCRM Ultimate Enterprise"
-  APP_VERSION = "7.0.0"
-  HOST = "0.0.0.0"
-  PORT = "8080"
-  
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 1
-  processes = ["app"]
-
-  [http_service.concurrency]
-    type = "requests"
-    hard_limit = 250
-    soft_limit = 200
+  PORT = "8000"
+  PYTHONUNBUFFERED = "1"
 
 [[services]]
   protocol = "tcp"
-  internal_port = 8080
+  internal_port = 8000
   processes = ["app"]
 
   [[services.ports]]
@@ -49,29 +25,10 @@ kill_timeout = "5s"
 
   [services.concurrency]
     type = "requests"
-    hard_limit = 250
-    soft_limit = 200
+    hard_limit = 25
+    soft_limit = 20
 
   [[services.tcp_checks]]
     interval = "15s"
     timeout = "2s"
-    grace_period = "5s"
-    restart_limit = 0
-
-  [[services.http_checks]]
-    interval = "10s"
-    timeout = "2s"
-    grace_period = "5s"
-    restart_limit = 0
-    method = "get"
-    path = "/health"
-    protocol = "http"
-    tls_skip_verify = false
-
-    [services.http_checks.headers]
-      X-Forwarded-Proto = "https"
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 512
+    grace_period = "1s"
