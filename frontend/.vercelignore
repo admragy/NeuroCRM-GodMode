@@ -1,0 +1,12 @@
+# Ignore backend and other heavy files when deploying frontend to Vercel
+/app/
+/app/**
+/migrations/
+/docker-compose.yml
+/Dockerfile
+/deployments/
+/fly.toml
+/tests/
+/scripts/
+/static/
+/templates/
